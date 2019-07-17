@@ -10,6 +10,9 @@ class Employee
   def bonus(multiplier)
     (salary) * multiplier
   end
+  def inspect
+    puts name  
+  end
 
 end
 
@@ -28,13 +31,11 @@ class Manager < Employee
     sum * multiplier
   end
 
-  def add_managed_emp(*emps)
-    self.managed_emps.push(emps)
+  def add_managed_emp(*emps) # arg1, arg2 => [arg1, arg2] => [[args1, arg2]]
+    self.managed_emps.concat(emps)
   end
 
-  def inspect
-    managed_emps.each {|emp| puts emp}
-  end
+  
 
 end
 
@@ -48,7 +49,7 @@ if $PROGRAM_NAME == __FILE__
   ned.add_managed_emp(darren, david, shawna)
   darren.add_managed_emp(david, shawna)
 
-  p ned.managed_emps
-  p darren.managed_emps
+  darren.managed_emps.each {|e| p e}
+  # p darren.managed_emps
 
 end
