@@ -15,7 +15,7 @@ class Knight < Piece
   ]
 
   def symbol
-    :Kn
+    :N
   end
 
   def move_diffs
