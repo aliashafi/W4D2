@@ -1,3 +1,5 @@
+require_relative "board"
+
 class Piece
   attr_reader :color, :board
   attr_accessor :pos
@@ -33,4 +35,9 @@ class Piece
   def move_into_check?(end_pos)
 
   end
+end
+
+if $PROGRAM_NAME == __FILE__
+  new_board = Board.new
+  rookie = Rook.new('red',new_board, [0,0])
 end

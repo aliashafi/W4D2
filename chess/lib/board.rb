@@ -1,5 +1,5 @@
 require_relative 'piece'
-require 'colorize'
+# require 'colorize'
 class Board
   attr_reader :rows
 
