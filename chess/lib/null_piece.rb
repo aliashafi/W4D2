@@ -6,7 +6,8 @@ class NullPiece < Piece
   include Singleton
   attr_reader :color
   def initialize
-    super("chartreuse")
+    @color = :light_magenta
+    
   end
 
   def moves 
@@ -14,7 +15,7 @@ class NullPiece < Piece
   end
 
   def symbol
-    :n
+    :' '
   end
 
 

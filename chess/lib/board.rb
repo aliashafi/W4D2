@@ -6,8 +6,12 @@ require_relative 'king'
 require_relative 'knight'
 require_relative 'pawn'
 require_relative 'null_piece'
+require_relative 'cursor'
+require_relative 'display'
 
 # require 'colorize'
+
+
 class Board
   attr_reader :rows
 
@@ -16,26 +20,34 @@ class Board
     @rows = Array.new(8) {Array.new(8, nil)}
 
     
-    @rows[0][0] = Rook.new("black",self,[0,0])
-    @rows[0][1] = King.new("black",self,[0,1])
-    @rows[0][2] = Bishop.new("black",self,[0,2])
-    @rows[0][3] = King.new("black",self,[0,3])
-    @rows[0][4] = Queen.new("black",self,[0,4])
-    @rows[0][5] = Bishop.new("black",self,[0,5])
-    @rows[0][6] = King.new("black",self,[0,6])
-    @rows[0][7] = Rook.new("black",self,[0,7])
+    @rows[0][0] = Rook.new(:black,self,[0,0])
+    @rows[0][1] = King.new(:black,self,[0,1])
+    @rows[0][2] = Bishop.new(:black,self,[0,2])
+    @rows[0][3] = King.new(:black,self,[0,3])
+    @rows[0][4] = Queen.new(:black,self,[0,4])
+    @rows[0][5] = Bishop.new(:black,self,[0,5])
+    @rows[0][6] = King.new(:black,self,[0,6])
+    @rows[0][7] = Rook.new(:black,self,[0,7])
 
-    @rows[7][0] = Rook.new("white",self,[7,0])
-    @rows[7][1] = King.new("white",self,[7,1])
-    @rows[7][2] = Bishop.new("white",self,[7,2])
-    @rows[7][3] = Queen.new("white",self,[7,3])
-    @rows[7][4] = King.new("white",self,[7,4])
-    @rows[7][5] = Bishop.new("white",self,[7,5])
-    @rows[7][6] = King.new("white",self,[7,6])
-    @rows[7][7] = Rook.new("white",self,[7,7])
+    @rows[7][0] = Rook.new(:white,self,[7,0])
+    @rows[7][1] = King.new(:white,self,[7,1])
+    @rows[7][2] = Bishop.new(:white,self,[7,2])
+    @rows[7][3] = Queen.new(:white,self,[7,3])
+    @rows[7][4] = King.new(:white,self,[7,4])
+    @rows[7][5] = Bishop.new(:white,self,[7,5])
+    @rows[7][6] = King.new(:white,self,[7,6])
+    @rows[7][7] = Rook.new(:white,self,[7,7])
 
+    @rows.each_with_index do |raw, idx1|
+      raw.each_with_index do |place, idx2|
+        if place.nil?
+          @rows[idx1][idx2] = NullPiece.instance
+        end
+      end
+    end
 
-
+    
+    
 
     # (0..1).each do |i|
     #   @rows[i].each_with_index do |ele, idx|
@@ -74,7 +86,7 @@ class Board
   end
 
   def valid_pos?(pos)
-
+    pos[0] > -1 && pos[0] < 8 && pos[1] > -1 && pos[1] < 8
   end
 
   def add_piece(piece, pos)
@@ -105,5 +117,12 @@ end
 
 if $PROGRAM_NAME == __FILE__
   test = Board.new
-  p test
+  curse = Cursor.new([0,0], test)
+  # p test
+  display = Display.new(test, curse)
+  5.times do 
+    display.render
+    curse.get_input
+  end
+  
 end
