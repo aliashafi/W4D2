@@ -1,4 +1,4 @@
-require_relative "board"
+# require_relative "board"
 
 class Piece
   attr_reader :color, :board
@@ -18,8 +18,7 @@ class Piece
   end
 
   def valid_moves
-    pos[0] > 7 || pos[0] < 0 || pos[1] > 7 || pos[1] < 0 
-    #a move is invalid if there's a piece at end 
+     
   end
 
   def pos=(val)
@@ -35,9 +34,4 @@ class Piece
   def move_into_check?(end_pos)
 
   end
-end
-
-if $PROGRAM_NAME == __FILE__
-  new_board = Board.new
-  rookie = Rook.new('red',new_board, [0,0])
 end

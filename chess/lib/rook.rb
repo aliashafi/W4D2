@@ -1,4 +1,4 @@
-require_relative "piece"
+require_relative "./piece"
 require_relative "../modules/slideable"
 
 class Rook < Piece
@@ -6,6 +6,10 @@ class Rook < Piece
   
   def move_dirs
     horizontal_dirs 
+  end
+
+  def symbol
+    :R
   end
   
 end

@@ -13,14 +13,23 @@ class Knight < Piece
     [ 2, -1],
     [ 2,  1]
   ]
-  
 
   def symbol
-
+    :Kn
   end
 
   def move_diffs
     OFFSETS
   end
 
+  def test
+    moves 
+  end 
+
+end
+
+if $PROGRAM_NAME == __FILE__
+  new_board = Board.new
+  rookie = Knight.new('red',new_board, [0,0])
+  p rookie.test
 end
